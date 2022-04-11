@@ -1,27 +1,37 @@
 package com.bridgelabz.employeewagecomp;
 
 /**
- * Check Employee Attendance.
+ * Program to Calculate Employee Daily Wage.
  * 
  * @author : Snehal Patil
  *
  */
 public class EmployeeWageComputation {
 	public static void main(String[] args) {
-		// Print Program name
 		System.out.println("Welcome to Employee Wage Computation !");
 
-		// Constant variable
-		int Full_Time = 1;
+		// Constants
+		int IS_FULL_TIME = 1;
+		int EMP_RATE_PER_HR = 20;
+		// Variables
+		int empHrs = 0;
+		int empWage = 0;
 
-		// Using Random function getting input either 0 or 1.
+		/*
+		 * Using Random function taking input either 0 or 1.calculating Daily wage
+		 * accordingly
+		 */
 		int Emp_Check = (int) (Math.floor(Math.random() * 10) % 2);
-		System.out.println("Random value for Employee Attendence check is: " + Emp_Check);
+		System.out.println("Random value for emp Attendence check is: " + Emp_Check);
 
-		if (Emp_Check == Full_Time) {
-			System.out.println("Employee is present .");
+		if (Emp_Check == IS_FULL_TIME) {
+			System.out.println("Employee is present.");
+			empHrs = 8;
 		} else {
-			System.out.println("Employee is Absent .");
+			System.out.println("Employee is Absent.");
+			empHrs = 0;
 		}
+		empWage = empHrs * EMP_RATE_PER_HR;
+		System.out.println("Employee Wage is : " + empWage);
 	}
 }
