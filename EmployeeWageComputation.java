@@ -3,88 +3,95 @@ package com.bridgelabz.employeewagecomp;
 import java.util.Scanner;
 
 /**
- * Compute Employee Wage for multiple companies
+ * Program for Ability to save the Total Wage for Each Company
  * 
  * @author : Snehal Patil
  *
  */
 public class EmployeeWageComputation {
-	// Constants
-	public static final int IS_FULL_TIME = 1;
+	// Declared Constant
+	public static final int IS_FUll_TIME = 1;
 	public static final int IS_PART_TIME = 2;
+
+	// Instance Variable
+	private final String company;
+	private final int emp_Wage_Per_Hr;
+	private final int max_Working_Days;
+	private final int maxHr_In_Month;
+	private int totalEmpWage;
+	private int totalEmpHrs;
+	private int countFullTime;
+	private int countPartTime;
+	private int countAbsent;
+
+	// Parameterised constructor calling
+	public EmployeeWageComputation(String company, int emp_Wage_Per_Hr, int max_Working_Days, int maxHr_In_Month) {
+		this.company = company;
+		this.emp_Wage_Per_Hr = emp_Wage_Per_Hr;
+		this.max_Working_Days = max_Working_Days;
+		this.maxHr_In_Month = maxHr_In_Month;
+	}
 
 	/*
 	 * Method takes required information from company. Using Random function taking
-	 * input either 0 or 1 or 2. Use of Switch cases. Print employee salary sheet
+	 * input either 0 or 1 or 2. Use of Switch cases. Calculate total salary.
 	 */
-	public static void computeEmployeeWage() {
-		// local variables
-		int emp_Wage_Per_Hr;
-		int max_Working_Days;
-		int maxHr_In_Month;
-		String company;
-		int flag = 0;
+	public void empWageComputation() {
+		// variables initialisation
+		int empHrs = 0, totalWorkingDays = 0;
 
-		while (flag == 0) {
-			Scanner sc = new Scanner(System.in);
-			System.out.print("Enter the name of company : ");
-			company = sc.next();
-			System.out.print("Company's employee wage per hour : ");
-			emp_Wage_Per_Hr = sc.nextInt();
-			System.out.print("Compony's maximum working days in a month : ");
-			max_Working_Days = sc.nextInt();
-			System.out.print("Company's maximum working hours in a month : ");
-			maxHr_In_Month = sc.nextInt();
+		while (totalEmpHrs <= maxHr_In_Month && totalWorkingDays < max_Working_Days) {
+			totalWorkingDays++;
 
-			// Variable
-			int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0, countFullTime = 0, countPartTime = 0,
-					countAbsent = 0;
-
-			while ((totalEmpHrs <= maxHr_In_Month) && (totalWorkingDays <= max_Working_Days)) {
-				totalWorkingDays++;
-				int Emp_Check = (int) Math.floor(Math.random() * 10) % 3;
-
-				switch (Emp_Check) {
-				case IS_FULL_TIME:
-					empHrs = 8;
-					countFullTime++;
-					break;
-
-				case IS_PART_TIME:
-					empHrs = 4;
-					countPartTime++;
-					break;
-
-				default:
-					countAbsent++;
-					empHrs = 0;
-				}
-				totalEmpHrs += empHrs;
-			}
-			// Calculating Monthly wage
-			int totalMonthlyWage = totalEmpHrs * emp_Wage_Per_Hr;
-			System.out.println();
-			System.out.println("Days Employee was present full time : " + countFullTime);
-			System.out.println("Days Employee was present half time : " + countPartTime);
-			System.out.println("Days Employee was absent : " + countAbsent);
-			System.out.println();
-			System.out.println("Employee worked " + totalEmpHrs + " Hrs in " + totalWorkingDays + " days.");
-			System.out.println();
-			System.out.println("Monthly Wage of employee in " + company + " : Rs. " + totalMonthlyWage);
-			System.out.println();
-
-			// To take user choice to Continue or stop
-			System.out.println("If you want to contiue ENTER 0 and if you want stop ENTER 1");
-			flag = sc.nextInt();
-			if (flag == 0) {
-				continue;
-			} else
+			int emp_Check = (int) Math.floor(Math.random() * 10) % 3;
+			switch (emp_Check) {
+			case IS_FUll_TIME:
+				empHrs = 8;
+				countFullTime++;
 				break;
+
+			case IS_PART_TIME:
+				empHrs = 4;
+				countPartTime++;
+				break;
+
+			default:
+				empHrs = 0;
+				countAbsent++;
+			}
+			totalEmpHrs += empHrs;
+			System.out.println("Day : " + totalWorkingDays + " Emp Hrs : " + empHrs);
 		}
+
+		// calculate total emp wage
+		totalEmpWage = totalEmpHrs * emp_Wage_Per_Hr;
+	}
+
+	@Override
+	public String toString() {
+		return " Company : " + company + " \n Days Employee was present full time : " + countFullTime
+				+ "\n Days Employee was present half time : " + countPartTime + "\n Days Employee was absent : "
+				+ countAbsent + "\n Total Employee working hours : " + totalEmpHrs + "\n Total Employee Wage : "
+				+ totalEmpWage + "";
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Welcome to Employee Wage Computation");
 
-		computeEmployeeWage();
+		// Initialise object with parameter
+		EmployeeWageComputation nike = new EmployeeWageComputation("Nike", 50, 25, 150);
+		EmployeeWageComputation tcs = new EmployeeWageComputation("TCS", 60, 26, 120);
+
+		// Calling method using object
+		nike.empWageComputation();
+		System.out.println();
+		System.out.println("Salary sheet : ");
+		System.out.println(nike); // displaying NIKE object
+		System.out.println("------------------------------------------------");
+
+		tcs.empWageComputation();
+		System.out.println();
+		System.out.println("Salary sheet : ");
+		System.out.println(tcs); // displaying TCS object
 	}
 }
