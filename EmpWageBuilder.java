@@ -1,12 +1,12 @@
 package com.bridgelabz.employeewagecomp;
 
 /**
- * Ability to manage Employee Wage of multiple companies
+ * Ability to manage Employee Wage of multiple companies using Interface
  * 
  * @author : Snehal Patil
  *
  */
-public class EmpWageBuilder {
+public class EmpWageBuilder implements ICompanyEmpWage {
 
 	// Declared global variables
 	public static final int IS_FUll_TIME = 1;
@@ -26,7 +26,8 @@ public class EmpWageBuilder {
 	 * Add companyEmpWage method to add company and passing information related of
 	 * company to compute employee wage
 	 */
-	private void addComapanyEmpWage(String company, int empWagePerHr, int maxWorkingDays, int maxHrPerMonth) {
+	@Override
+	public void addComapanyEmpWage(String company, int empWagePerHr, int maxWorkingDays, int maxHrPerMonth) {
 		companyWageArray[numberOfCompany] = new CompanyEmpWage(company, empWagePerHr, maxWorkingDays, maxHrPerMonth);
 		numberOfCompany++;
 
@@ -39,6 +40,9 @@ public class EmpWageBuilder {
 	public int empWageCalculation(CompanyEmpWage companyEmpWage) {
 
 		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+
+		System.out.println("Salary sheet of employee : ");
+		System.out.println();
 
 		// Check total employee hour and total days not more than given limit
 		while (totalEmpHrs <= companyEmpWage.maxHrPerMonth && totalWorkingDays < companyEmpWage.maxWorkingDays) {
@@ -62,6 +66,7 @@ public class EmpWageBuilder {
 
 			// calculate total employee hours
 			totalEmpHrs += empHrs;
+			System.out.println("Day : " + totalWorkingDays + "-> Working Hrs : " + empHrs);
 		}
 
 		// Calculate total employee wage
@@ -69,23 +74,26 @@ public class EmpWageBuilder {
 	}
 
 	// Display array of company employee wage
-	private void empWageCalculation() {
+	@Override
+	public void empWageCalculation() {
 		for (int i = 0; i < numberOfCompany; i++) {
 			companyWageArray[i].setTotalEmpWage(empWageCalculation(companyWageArray[i]));
+			System.out.println();
 			System.out.println(companyWageArray[i]);
-			System.out.println("--------------------------------------------------------------");
+			System.out.println("\n--------------------------------------------------------------");
 		}
 	}
 
 	public static void main(String[] args) {
 
-		System.out.println("---------- Welcome to Employee Wage Computation --------------");
+		System.out.println("------------ Welcome to Employee Wage Computation ------------");
 		System.out.println();
 
 		EmpWageBuilder companyWageArray = new EmpWageBuilder();
 		companyWageArray.addComapanyEmpWage("Nike", 50, 25, 150);
 		companyWageArray.addComapanyEmpWage("TCS", 60, 26, 120);
 		companyWageArray.addComapanyEmpWage("Amazon", 15, 25, 100);
+		System.out.println("--------------------------------------------------------------");
 		companyWageArray.empWageCalculation();
 	}
 
