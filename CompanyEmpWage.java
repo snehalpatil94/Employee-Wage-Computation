@@ -24,6 +24,6 @@ public class CompanyEmpWage {
 
 	// To-string method: display purpose
 	public String toString() {
-		return "[Total wage paid by " + company + " to emplyee: " + totalEmpWage + "]";
+		return "[Monthly wage should paid by " + company + " to emplyee: " + totalEmpWage + "]";
 	}
 }
