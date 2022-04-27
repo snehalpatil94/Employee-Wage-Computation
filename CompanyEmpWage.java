@@ -9,7 +9,8 @@ public class CompanyEmpWage {
 	public final int maxHrPerMonth;
 	public int totalEmpWage;
 	
-// Parameterised constructor
+
+// Parameterised Constructor
 	public CompanyEmpWage(String company, int empWagePerHr, int workingDayPerMonth, int maxHrsPerMonth) {
 		this.company = company;
 		this.empWagePerHr = empWagePerHr;
@@ -17,13 +18,13 @@ public class CompanyEmpWage {
 		this.maxHrPerMonth = maxHrsPerMonth;
 	}
 
-	// setter : set total Employee wage
+	// Setter : set total Employee wage
 	public void setTotalEmpWage(int totalEmpWage) {
 		this.totalEmpWage = totalEmpWage;
 	}
 
 	// To-string method: display purpose
 	public String toString() {
-		return "[Monthly wage should paid by " + company + " to emplyee: INR " + totalEmpWage + "]";
+		return "[Monthly wage should paid by " + company + " to emplyee: " + totalEmpWage + "]";
 	}
 }
