@@ -8,7 +8,7 @@ public class CompanyEmpWage {
 	public final int maxWorkingDays;
 	public final int maxHrPerMonth;
 	public int totalEmpWage;
-
+	
 // Parameterised constructor
 	public CompanyEmpWage(String company, int empWagePerHr, int workingDayPerMonth, int maxHrsPerMonth) {
 		this.company = company;
@@ -24,6 +24,6 @@ public class CompanyEmpWage {
 
 	// To-string method: display purpose
 	public String toString() {
-		return "[Monthly wage should paid by " + company + " to emplyee: " + totalEmpWage + "]";
+		return "[Monthly wage should paid by " + company + " to emplyee: INR " + totalEmpWage + "]";
 	}
 }
