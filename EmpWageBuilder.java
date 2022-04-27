@@ -1,14 +1,14 @@
 package com.bridgelabz.employeewagecomp;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- * Store the Daily Wage along with the Total Wage
+ * Ability to get the Total Wage when queried by Company
  * 
  * @author : Snehal Patil
  *
  */
-
 public class EmpWageBuilder implements IEmpWageBuilder {
 
 	// Declared global variables
@@ -43,9 +43,6 @@ public class EmpWageBuilder implements IEmpWageBuilder {
 
 		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
 
-		System.out.println("Salary sheet of employee : ");
-		System.out.println();
-
 		// Check total employee hour and total days not more than given limit
 		while (totalEmpHrs <= companyEmpWage.maxHrPerMonth && totalWorkingDays < companyEmpWage.maxWorkingDays) {
 
@@ -68,7 +65,6 @@ public class EmpWageBuilder implements IEmpWageBuilder {
 
 			// calculate total employee hours
 			totalEmpHrs += empHrs;
-			System.out.println("Day : " + totalWorkingDays + "-> Working Hrs : " + empHrs);
 		}
 
 		// Calculate total employee wage
@@ -78,15 +74,23 @@ public class EmpWageBuilder implements IEmpWageBuilder {
 	// Display array of company employee wage
 	@Override
 	public void displayEmpWage() {
-		System.out.println("List of Company and its employee wage : ");
-		System.out.println();
-		System.out.println("--------------------------------------------------------------");
 		for (int i = 0; i < companyWageArrayList.size(); i++) {
 			CompanyEmpWage companyEmpWage = companyWageArrayList.get(i);
-			companyEmpWage.setTotalEmpWage(empWageCalculation(companyEmpWage));
-			System.out.println();
-			System.out.println(companyEmpWage);
-			System.out.println("--------------------------------------------------------------");
+
+			int totalEmpWage = this.empWageCalculation(companyEmpWage);
+			System.out.println("Do you want to print total wage of " + companyEmpWage.company);
+			Scanner sc = new Scanner(System.in);
+			String input = sc.next();
+			String check = "yes";
+			if (input.equalsIgnoreCase(check)) {
+
+				System.out.println(
+						"\nTotal Employee Wage for Company " + companyEmpWage.company + " is " + totalEmpWage + " INR");
+				System.out.println(" -------------------------------------------------------------");
+			} else {
+				System.out.println("Thank You.....");
+				System.out.println("--------------------------------------------------------------");
+			}
 		}
 	}
 
